@@ -40,7 +40,6 @@ en:
       items:
         - PostgreSQL
         - MySQL
-        - Redis
     - id: practices
       title: Practices
       icon: construction
@@ -91,7 +90,6 @@ vi:
       items:
         - PostgreSQL
         - MySQL
-        - Redis
     - id: practices
       title: Thực hành
       icon: construction
