@@ -1,26 +1,357 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --glow-color: rgba(0, 218, 243, 0.15);
+  --background: #0a0c10;
+  --foreground: #dfe2eb;
 }
 
 @theme inline {
+  --color-primary: #00daf3;
+  --color-primary-container: #006a77;
+  --color-on-primary: #00363d;
+  --color-on-primary-container: #77ebff;
+  --color-secondary: #bbc6e2;
+  --color-secondary-container: #3e4960;
+  --color-on-secondary-container: #adb8d3;
+  --color-tertiary: #b2c8e7;
+  --color-tertiary-container: #4c627c;
+  --color-surface: #0a0c10;
+  --color-surface-dim: #10141a;
+  --color-surface-container-lowest: #0a0e14;
+  --color-surface-container-low: #181c22;
+  --color-surface-container: #1c2026;
+  --color-surface-container-high: #1c2026;
+  --color-surface-container-highest: #31353c;
+  --color-surface-variant: #31353c;
+  --color-on-surface: #dfe2eb;
+  --color-on-surface-variant: #c2c6d4;
+  --color-outline: #8c919d;
+  --color-outline-variant: #424752;
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --radius-sm: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Light theme: full neutral + surface tokens so text-on-surface / variants stay readable */
+html.light {
+  --background: #f0f2f5;
+  --foreground: #1a1c1e;
+  --glow-color: rgba(0, 139, 154, 0.12);
+  --color-on-surface: #1a1c1e;
+  --color-on-surface-variant: #44474e;
+  --color-outline: #5e6368;
+  --color-outline-variant: #c1c6ce;
+  --color-surface: #f0f2f5;
+  --color-surface-dim: #e3e5ea;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f8fa;
+  --color-surface-container: #eef0f4;
+  --color-surface-container-high: #e8eaef;
+  --color-surface-container-highest: #e2e4ea;
+  --color-surface-variant: #dde1e7;
+  --color-background: #f0f2f5;
+  --color-foreground: #1a1c1e;
+  --color-secondary-container: #d8e0f0;
+  --color-on-secondary-container: #2d3548;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.headline-font {
+  font-family: var(--font-headline);
+}
+
+/* Grain Texture Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Animated Technical Grid Background */
+.grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 218, 243, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 218, 243, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: -1;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+/* Mesh Gradient Animation */
+.mesh-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(at 0% 0%, rgba(0, 106, 119, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(27, 50, 74, 0.15) 0px, transparent 50%);
+  z-index: -2;
+  filter: blur(100px);
+  animation: meshMove 20s infinite alternate linear;
+}
+
+@keyframes meshMove {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(28, 32, 38, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 218, 243, 0.3);
+  box-shadow: 0 0 30px var(--glow-color);
+  transform: translateY(-4px);
+}
+
+/* Light Mode Overrides */
+html.light body {
+  background-color: #f0f2f5;
+  color: #1a1c1e;
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+html.light .text-on-surface-main {
+  color: #1a1c1e;
+}
+
+html.light .text-on-surface-variant {
+  color: #44474e;
+}
+
+html.light .bg-surface-highest-20 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+html.light .text-on-surface-muted {
+  color: rgba(26, 28, 30, 0.7);
+}
+
+/* Nav: solid readable background in light mode */
+html.light nav.nav-bar {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+html.dark nav.nav-bar {
+  background: rgba(10, 12, 16, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Mobile drawer */
+html.light .nav-mobile-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.dark .nav-mobile-panel {
+  background: rgba(10, 12, 16, 0.97);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Footer bar */
+html.light footer.site-footer {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.dark footer.site-footer {
+  background: rgba(10, 12, 16, 0.8);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Language toggle inactive chip */
+html.light .lang-toggle-inactive {
+  color: #44474e;
+}
+
+html.light .lang-toggle-inactive:hover {
+  color: var(--color-primary);
+}
+
+html.dark .lang-toggle-inactive {
+  color: rgba(223, 226, 235, 0.65);
+}
+
+html.dark .lang-toggle-inactive:hover {
+  color: var(--color-primary);
+}
+
+/* Hero intro badge: explicit contrast (light was washing out text-on-secondary-container on /30 bg) */
+html.light .hero-intro-badge {
+  background: rgba(216, 224, 240, 0.92);
+  color: #1e293b;
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+html.dark .hero-intro-badge {
+  background: rgba(62, 73, 96, 0.5);
+  color: var(--color-on-secondary-container);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Chip công nghệ (project cards) — theme sáng: nền cyan rất nhạt, không xám đặc */
+html.light .chip-tech {
+  background-color: rgba(0, 184, 204, 0.12);
+  border-color: rgba(0, 105, 118, 0.28);
+  color: var(--color-on-surface);
+}
+
+html.dark .chip-tech {
+  background-color: rgba(49, 53, 60, 0.55);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-on-surface);
+}
+
+/* Tag ngôn ngữ / kỹ năng (Skills programming row) */
+html.light .skills-prog-tag {
+  background-color: rgba(0, 184, 204, 0.1);
+  border-color: rgba(0, 105, 118, 0.24);
+  color: var(--color-on-surface);
+}
+
+html.dark .skills-prog-tag {
+  background-color: rgba(26, 32, 38, 0.65);
+  border-color: rgba(255, 255, 255, 0.09);
+  color: var(--color-on-surface);
+}
+
+/* Thẻ kiến trúc (MẪU / Microservices, …) — theme sáng */
+html.light .arch-bento-item {
+  background: linear-gradient(165deg, #ecf9fb 0%, #e4f3f6 55%, #dff0f3 100%);
+  border-color: rgba(0, 139, 154, 0.22);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+html.light .arch-bento-item:hover {
+  background: linear-gradient(165deg, #e2f6f9 0%, #d9eef2 100%);
+}
+
+/* Chữ đậm, tương phản cao — tránh nhìn “mờ” trên nền cyan nhạt */
+html.light .arch-bento-item .arch-bento-tag {
+  color: #334155;
+}
+
+html.light .arch-bento-item .arch-bento-title {
+  color: #0a1628;
+}
+
+html.dark .arch-bento-item {
+  background: rgba(10, 14, 20, 0.4);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.dark .arch-bento-item .arch-bento-tag {
+  color: var(--color-on-surface-variant);
+}
+
+html.dark .arch-bento-item .arch-bento-title {
+  color: var(--color-on-surface);
+}
+
+html.dark .arch-bento-item:hover {
+  background: rgba(0, 218, 243, 0.06);
+}
+
+/* Vùng icon đầu thẻ project — theme sáng bớt xám */
+html.light .project-card-hero {
+  background-color: rgba(0, 184, 204, 0.07);
+}
+
+html.dark .project-card-hero {
+  background-color: rgba(49, 53, 60, 0.22);
+}
+
+/* Nút mở repo frontend / backend — rõ là clickable */
+html.light .project-repo-btn {
+  background-color: rgba(0, 184, 204, 0.14);
+  border: 2px solid rgba(0, 120, 135, 0.42);
+  color: #0a5c66;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+html.light .project-repo-btn:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: 0 4px 20px rgba(0, 184, 204, 0.35);
+}
+
+html.light .project-repo-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+html.dark .project-repo-btn {
+  background-color: rgba(0, 218, 243, 0.1);
+  border: 2px solid rgba(0, 218, 243, 0.5);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 1px rgba(0, 218, 243, 0.08);
+}
+
+html.dark .project-repo-btn:hover {
+  background-color: rgba(0, 218, 243, 0.2);
+  border-color: var(--color-primary);
+  color: #e8fdff;
+  box-shadow: 0 0 28px rgba(0, 218, 243, 0.28);
+}
+
+html.dark .project-repo-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
