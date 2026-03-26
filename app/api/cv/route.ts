@@ -4,12 +4,15 @@ import matter from "gray-matter";
 import { NextResponse } from "next/server";
 
 const dataDir = join(process.cwd(), "data");
+const CV_CANDIDATES = ["cv.pdf", "CV.pdf", "Cv.pdf"];
 
 export async function GET() {
-  const pdfPath = join(dataDir, "cv.pdf");
-  if (!existsSync(pdfPath)) {
+  const pdfPath = CV_CANDIDATES.map((name) => join(dataDir, name)).find((p) =>
+    existsSync(p)
+  );
+  if (!pdfPath) {
     return new NextResponse(
-      "Chưa có file CV. Thêm data/cv.pdf (PDF đặt cạnh data/cv.md).",
+      "Chưa có file CV. Thêm data/cv.pdf (hoặc CV.pdf) cạnh data/cv.md.",
       { status: 404, headers: { "Content-Type": "text/plain; charset=utf-8" } }
     );
   }
