@@ -4,7 +4,11 @@ import matter from "gray-matter";
 import { NextResponse } from "next/server";
 
 const dataDir = join(process.cwd(), "data");
-const CV_CANDIDATES = ["cv.pdf", "CV.pdf", "Cv.pdf"];
+const CV_CANDIDATES = [
+  "NguyenQuocKhanhJavaCV.pdf",
+  "nguyenuockhanhjavacv.pdf",
+  "NGUYENUOCKHANHJAVACV.pdf",
+];
 
 export async function GET() {
   const pdfPath = CV_CANDIDATES.map((name) => join(dataDir, name)).find((p) =>
@@ -17,7 +21,7 @@ export async function GET() {
     );
   }
 
-  let downloadFilename = "cv.pdf";
+  let downloadFilename = "nguyenuockhanhjavacv.pdf";
   const metaPath = join(dataDir, "cv.md");
   if (existsSync(metaPath)) {
     try {
