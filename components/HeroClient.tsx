@@ -62,12 +62,12 @@ export function HeroClient({ data }: { data: IntroData }) {
         <div className="md:col-span-5 hidden md:block">
           <Reveal delay={200}>
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary-container/30 blur-2xl rounded-xl opacity-50 group-hover:opacity-100 transition duration-1000" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/35 to-primary-container/35 blur-2xl rounded-xl opacity-0 group-hover:opacity-100 transition duration-700" />
               <div className="relative glass-card p-2 rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-                <div className="absolute inset-0 bg-primary/5 mix-blend-overlay pointer-events-none" />
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 mix-blend-overlay pointer-events-none transition-colors duration-500" />
                 <Image
                   alt="Profile"
-                  className="w-full aspect-square object-cover rounded-lg grayscale hover:grayscale-0 transition-all duration-700 hover:scale-[1.02]"
+                  className="w-full aspect-square object-cover rounded-lg brightness-110 contrast-105 saturate-110 transition-all duration-700 group-hover:scale-[1.02]"
                   src={data.profileImage}
                   width={400}
                   height={400}

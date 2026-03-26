@@ -23,8 +23,8 @@ en:
         - REST API + Swagger; JPA/Hibernate; integrated VNPay and social login.
         - Oct 2025 – Dec 2025 · 4 members
       links:
-        frontend: "#"
-        backend: "#"
+        frontend: "https://github.com/magiauy/FE_BusBooking_J2EE"
+        backend: "https://github.com/magiauy/BusBooking"
     - title: Lego Shop Management (Desktop)
       objective: >
         Desktop app for shop operations with BCrypt auth, fine-grained permissions, and
@@ -41,7 +41,7 @@ en:
       highlights:
         - Feb 2026 – present · 4 members · HikariCP connection pooling.
       links:
-        backend: "#"
+        backend: "https://github.com/HoangDang119763/ManageLegoShop_DesktopApp_V2"
 
 vi:
   title: Dự án
@@ -66,8 +66,8 @@ vi:
         - REST + Swagger; JPA/Hibernate; tích hợp VNPay và đăng nhập mạng xã hội.
         - Tháng 10 – 12/2025 · 4 thành viên
       links:
-        frontend: "#"
-        backend: "#"
+        frontend: "https://github.com/magiauy/FE_BusBooking_J2EE"
+        backend: "https://github.com/magiauy/BusBooking"
     - title: Quản lý cửa hàng Lego (Desktop)
       objective: >
         Ứng dụng desktop vận hành cửa hàng: BCrypt, phân quyền chi tiết, module HR —
@@ -84,6 +84,6 @@ vi:
       highlights:
         - Tháng 2/2026 – hiện tại · 4 thành viên · HikariCP.
       links:
-        backend: "#"
+        backend: "https://github.com/HoangDang119763/ManageLegoShop_DesktopApp_V2"
 
 ---
